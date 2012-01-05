@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Upyun::Paperclip::VERSION
   s.authors     = ["frankel"]
   s.email       = ["frankelma@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/frankel/upyun-paperclip"
   s.summary     = %q{Upyun gem for paperclip}
   s.description = %q{Upyun gem for paperclip}
 
