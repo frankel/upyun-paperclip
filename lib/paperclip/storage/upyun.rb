@@ -21,7 +21,6 @@ module Paperclip
               begin
                 true if @resource[relative_path].get.code == 200
               rescue RestClient::ResourceNotFound
-                debugger
                 false
               end
           else
@@ -39,10 +38,8 @@ module Paperclip
             path_array.reject!{|p| p == ''}
             path_array.each do |p|
               current_path = current_path + p + '/'
-              debugger
               @resource[current_path].post '', :folder => true
             end
-            # debugger
             @resource[relative_path].post File.read(file) 
             
           end
