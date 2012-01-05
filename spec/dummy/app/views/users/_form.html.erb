@@ -1,0 +1,10 @@
+<%= form_for @user, :html => { :multipart => true } do |f| %>
+
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <%= f.file_field :avatar %>
+  <p><%= f.submit %></p>
+<% end %>

@@ -1,0 +1,12 @@
+<% title "User" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+<%= image_tag @user.avatar.path(:medium) %>
+<p>
+  <%= link_to "Edit", edit_user_path(@user) %> |
+  <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", users_path %>
+</p>
