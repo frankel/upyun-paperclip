@@ -1,6 +1,6 @@
 # UpYun Storage engine for paperclip
 
-This gem allows you to use [UpYun Storage] (http://www.upyun.com) as storage engine for [paperclip] (https://github.com/thoughtbot/paperclip)
+This gem allows you to use [UpYun Storage](http://www.upyun.com) as storage engine for [paperclip](https://github.com/thoughtbot/paperclip)
 
 ## Installation
 
