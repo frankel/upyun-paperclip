@@ -59,7 +59,11 @@ module Paperclip
         
         def flush_deletes #:nodoc:
           @queued_for_delete.each do |path|
-            # TODO:
+            relative_path = path.gsub(@upyun_domain, '')
+            begin
+              @resource[relative_path].delete
+            rescue
+            end
           end
           @queued_for_delete = []
         end
