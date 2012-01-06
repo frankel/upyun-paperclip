@@ -8,11 +8,16 @@ This gem allows you to use [UpYun Storage](http://www.upyun.com) as storage engi
     
 ## Rails 3
 
-    gem "upyun-paperclip", "~> 0.1.3"
+Using paperclip's master branch since this [issue](https://github.com/thoughtbot/paperclip/issues/655) is fixed in it.
+
+    gem "paperclip", :git => 'git://github.com/thoughtbot/paperclip.git'
+    gem "upyun-paperclip", :git => 'git://github.com/frankel/upyun-paperclip.git'
     
 ## Usage
 
-For example, if you have a model named User, then you can 
+If you have a model named User, then you can set options like this.
+
+### One model
 
 ```ruby
 class User < ActiveRecord::Base  
@@ -31,4 +36,17 @@ class User < ActiveRecord::Base
   }
 end
 ```
+### Multiple models
 
+If you have more than one model to use paperclip, and feel bored to set the same options for each one, you can create a file named `paperclip.rb` under `config\initializers` folder, and write code like this:
+
+```ruby
+Paperclip::Storage::Upyun::Config = { 
+  :upyun_bucketname => 'bucketname',
+  :upyun_username => 'username',
+  :upyun_password => 'password',
+  :upyun_domain => 'domain'
+}
+```
+
+and only set `:storage => :upyun` in each models.
