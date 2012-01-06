@@ -1,16 +1,24 @@
+require 'rest-client'
+
 module Paperclip
   module Storage
     module Upyun
       def self.extended base
         base.instance_eval do
-          @upyun_bucketname = @options[:upyun_bucketname]
-          @upyun_username =  @options[:upyun_username]
-          @upyun_password =  @options[:upyun_password]
-          @upyun_domain = @options[:upyun_domain]
-          @upyun_api_host = @options[:upyun_api_host] || 'http://v1.api.upyun.com/'
           
-          @options[:path] = @options[:path].gsub(/:url/, @options[:url]).gsub(/^:rails_root\/public\/system/, @upyun_domain)
+          # Please use the latest paperclip from git://github.com/thoughtbot/paperclip.git
+          # Since the latest one solves this issue:
+          # https://github.com/thoughtbot/paperclip/issues/655
 
+          @upyun_bucketname = @options[:upyun_bucketname] || Paperclip::Storage::Upyun::Config[:upyun_bucketname]
+          @upyun_username =  @options[:upyun_username] || Paperclip::Storage::Upyun::Config[:upyun_username]
+          @upyun_password =  @options[:upyun_password] || Paperclip::Storage::Upyun::Config[:upyun_password]
+          @upyun_domain = @options[:upyun_domain] || Paperclip::Storage::Upyun::Config[:upyun_domain]
+          @upyun_api_host = @options[:upyun_api_host] || Paperclip::Storage::Upyun::Config[:upyun_api_host] || 'http://v1.api.upyun.com/'
+
+          @options[:path] = @options[:path].gsub(/:url/, @options[:url]).gsub(/^:rails_root\/public/, @upyun_domain)
+          @options[:url] =  @upyun_domain + @options[:url]
+          
           @resource = RestClient::Resource.new("#{@upyun_api_host}#{@upyun_bucketname}", :user => @upyun_username, :password => @upyun_password )
         end
       end
@@ -30,7 +38,7 @@ module Paperclip
 
 
         def flush_writes #:nodoc:
-          @queued_for_write.each do |style_name, file|            
+          @queued_for_write.each do |style_name, file|       
             current_path = ''
             relative_path = path(style_name).gsub(@upyun_domain, '')
             path_array = relative_path.split('/')
