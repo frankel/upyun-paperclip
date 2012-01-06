@@ -6,6 +6,10 @@ This gem allows you to use [UpYun Storage](http://www.upyun.com) as storage engi
 
     gem install upyun-paperclip
     
+## Rails 3
+
+    gem "upyun-paperclip", "~> 0.1.3"
+    
 ## Usage
 
 For example, if you have a model named User, then you can 
