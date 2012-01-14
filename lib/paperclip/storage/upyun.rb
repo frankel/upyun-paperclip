@@ -14,7 +14,7 @@ module Paperclip
           @upyun_username =  @options[:upyun_username] || Paperclip::Storage::Upyun::Config[:upyun_username]
           @upyun_password =  @options[:upyun_password] || Paperclip::Storage::Upyun::Config[:upyun_password]
           @upyun_domain = @options[:upyun_domain] || Paperclip::Storage::Upyun::Config[:upyun_domain]
-          @upyun_api_host = @options[:upyun_api_host] || Paperclip::Storage::Upyun::Config[:upyun_api_host] || 'http://v1.api.upyun.com/'
+          @upyun_api_host = @options[:upyun_api_host] || ( defined? Paperclip::Storage::Upyun::Config  || Paperclip::Storage::Upyun::Config[:upyun_api_host].nil?) ? 'http://v1.api.upyun.com/' : Paperclip::Storage::Upyun::Config[:upyun_api_host]
 
           @options[:path] = @options[:path].gsub(/:url/, @options[:url]).gsub(/^:rails_root\/public/, @upyun_domain)
           @options[:url] =  @upyun_domain + @options[:url]
