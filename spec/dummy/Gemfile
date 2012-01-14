@@ -17,9 +17,9 @@ group :assets do
 end
 
 gem "nifty-generators"
-gem 'paperclip', :path => '~/github/paperclip'
-gem 'upyun-paperclip', :path => '~/github/upyun-paperclip'
-gem 'ruby-debug19'
+gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
+gem 'upyun-paperclip',:git => 'git://github.com/frankel/upyun-paperclip.git'
+gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'jquery-rails'
 
