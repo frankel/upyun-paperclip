@@ -41,15 +41,7 @@ module Paperclip
           @queued_for_write.each do |style_name, file|       
             current_path = ''
             relative_path = path(style_name).gsub(@upyun_domain, '')
-            path_array = relative_path.split('/')
-            path_array.pop
-            path_array.reject!{|p| p == ''}
-            path_array.each do |p|
-              current_path = current_path + p + '/'
-              @resource[current_path].post '', :folder => true
-            end
-            @resource[relative_path].post File.read(file) 
-            
+            @resource[relative_path].post File.read(file), {'Expect' => '', 'Mkdir' => 'true'}
           end
 
           after_flush_writes # allows attachment to clean up temp files
@@ -68,9 +60,6 @@ module Paperclip
           @queued_for_delete = []
         end
 
-
-
-    
     end
   end
 end
