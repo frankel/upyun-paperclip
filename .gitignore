@@ -8,3 +8,9 @@ pkg/*
 doc/test.rb
 
 doc/test.png
+
+spec/dummy/config/initializers/paperclip.rb
+
+spec/dummy/Gemfile
+
+spec/dummy/Gemfile
