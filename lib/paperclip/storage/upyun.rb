@@ -6,7 +6,7 @@ module Paperclip
     module Upyun
       def self.extended base
         base.instance_eval do
-          
+
           # Please use the latest paperclip from git://github.com/thoughtbot/paperclip.git
           # Since the latest one solves this issue:
           # https://github.com/thoughtbot/paperclip/issues/655
@@ -19,11 +19,11 @@ module Paperclip
 
           @options[:path] = @options[:path].gsub(/:url/, @options[:url]).gsub(/^:rails_root\/public/, @upyun_domain)
           @options[:url] =  @upyun_domain + @options[:url]
-          
+
           @resource = RestClient::Resource.new("#{@upyun_api_host}#{@upyun_bucketname}", :user => @upyun_username, :password => @upyun_password )
         end
       end
-      
+
         def exists?(style_name = default_style)
           if original_filename
               relative_path = URI::encode path(style_name).gsub(@upyun_domain, '')
@@ -39,18 +39,18 @@ module Paperclip
 
 
         def flush_writes #:nodoc:
-          @queued_for_write.each do |style_name, file|       
+          @queued_for_write.each do |style_name, file|
             current_path = ''
             relative_path = URI::encode path(style_name).gsub(@upyun_domain, '')
-            
-            @resource[relative_path].post File.read(file), {'Expect' => '', 'Mkdir' => 'true'}
+
+            @resource[relative_path].post file, {'Expect' => '', 'Mkdir' => 'true'}
           end
 
           after_flush_writes # allows attachment to clean up temp files
 
           @queued_for_write = {}
         end
-        
+
         def flush_deletes #:nodoc:
           @queued_for_delete.each do |path|
             relative_path = URI::encode path.gsub(@upyun_domain, '')
