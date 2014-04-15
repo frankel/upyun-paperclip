@@ -8,9 +8,7 @@ This gem allows you to use [UpYun Storage](http://www.upyun.com) as storage engi
     
 ## Rails 3
 
-Using paperclip's master branch since this [issue](https://github.com/thoughtbot/paperclip/issues/655) is fixed in it.
-
-    gem "paperclip", :git => 'git://github.com/thoughtbot/paperclip.git'
+    gem "paperclip"
     gem "upyun-paperclip", :git => 'git://github.com/frankel/upyun-paperclip.git'
     
 ## Usage
