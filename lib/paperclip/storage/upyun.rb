@@ -17,7 +17,7 @@ module Paperclip
           @upyun_domain = @options[:upyun_domain] || Paperclip::Storage::Upyun::Config[:upyun_domain]
           @upyun_api_host = @options[:upyun_api_host] || Paperclip::Storage::Upyun::Config[:upyun_api_host] || 'http://v0.api.upyun.com/'
 
-          @options[:path] = @options[:path].gsub(/:url/, @options[:url]).gsub(/^:rails_root\/public/, @upyun_domain)
+          @options[:path] = @options[:path].gsub(/:url/, @options[:url]).gsub(/^:rails_root\/assets/, @upyun_domain)
           @options[:url] =  @upyun_domain + @options[:url]
 
           @resource = RestClient::Resource.new("#{@upyun_api_host}#{@upyun_bucketname}", :user => @upyun_username, :password => @upyun_password )
